@@ -10,6 +10,8 @@ require('./routes/login')(passport);
 var index = require('./routes/index');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
+var files = require('./routes/files');
+var userprofile = require('./routes/userprofile');
 
 var app = express();
 
@@ -30,6 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.post('/doSignUp',signup.doSignUp);
+app.use('/files',files);
+app.post('/saveUserProfile',userprofile.saveUserProfile);
 app.post('/login',function(req, res,next) {
     console.log("username in app" + JSON.stringify(req.body));
     passport.authenticate('login', function(err, user) {
@@ -52,8 +56,8 @@ app.post('/login',function(req, res,next) {
             //username: user.username,
             //userid: user.userid,
             //root: user.root,
-            userid : user.userid,
-            email:user.email,
+            //userid : user.userid,
+           // email:user.email,
             status: '201'});
     })(req, res,next);
 });
