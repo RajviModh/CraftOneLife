@@ -30,8 +30,6 @@ class Login extends Component {
 
     render() {
         return (
-
-
                 <div className="col-sm-7 col-md-7">
                     <form>
                         <div className="form-group">

@@ -7,6 +7,10 @@ module.exports = function(passport) {
         var reqUsername = username;
         var reqPassword = password;
         console.log("in login of node");
+        done(null, {
+            username: username
+            // user:filelist
+        });
 }));
 };
 
