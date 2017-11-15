@@ -16,7 +16,7 @@ var fetchUserProfile=function (req,res){
             }
             else {
                 console.log("User Profile ",results[0])
-                //var bitmap = fs.readFileSync(results[0].profile_pic);
+                var bitmap = fs.readFileSync(results[0].bookTilePath);
                 //convert binary data to base64 encoded string
                 //console.log(new Buffer(bitmap).toString('base64'))
                 var data={
@@ -24,8 +24,8 @@ var fetchUserProfile=function (req,res){
                     lname:results[0].lname,
                     email:results[0].email,
                     contact_no:results[0].contact_no,
-                    about_me:results[0].email
-                 //   profile_pic:(new Buffer(bitmap).toString('base64'))
+                    about_me:results[0].email,
+                    profile_pic:(new Buffer(bitmap).toString('base64'))
 
                 }
                 res.status(201).json({status:'201',data:data});

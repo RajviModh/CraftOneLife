@@ -13,6 +13,7 @@ import ArtistDetails from './ArtistDetails';
 import ArtistWelcomePage from './ArtistWelcomePage';
 import ArtistUploadBooks from './ArtistUploadBooks';
 import ArtistProfilePage from './ArtistProfilePage';
+import ArtistDisplayProfile from './ArtistDisplayProfile';
 import BooksAdventure from './BooksAdventure';
 import BookDetails from './BookDetails';
 
@@ -29,7 +30,8 @@ class NewerHomePage extends Component {
         message: '',
         username: '',
         showLoginModal: false,
-        showSignupModal: false
+        showSignupModal: false,
+        bookDetails:''
     };
 
     handleSubmit = (userdata) => {
@@ -51,6 +53,12 @@ class NewerHomePage extends Component {
                 }
             });
     };
+    getBookDetails = (bookDetails) => {
+
+        this.setState({bookDetails:bookDetails});
+        this.props.history.push("/getbookdetails");
+
+    };
     handleSignUp = (userdata) => {
         //alert("in signup");
         API.doSignup(userdata)
@@ -71,28 +79,6 @@ class NewerHomePage extends Component {
                 }
 
             })
-    };
-
-    close = (data) => {
-
-        if (data === 'login') {
-            //alert("in login of close");
-            this.setState({showLoginModal: false});
-        }
-        else if (data === 'signup') {
-            //alert("in signup of close");
-            this.setState({showSignupModal: false});
-        }
-    };
-    open = (data) => {
-        if (data === 'login') {
-            alert("in login of open");
-            this.setState({showLoginModal: true});
-        }
-        else if (data === 'signup') {
-            alert("in signup of open");
-            this.setState({showSignupModal: true});
-        }
     };
 
     render() {
@@ -249,20 +235,8 @@ class NewerHomePage extends Component {
                                          <nav id="fh5co-menu-wrap" role="navigation">
                                              <ul className="sf-menu" id="fh5co-primary-menu">
                                                  <li className="active"><a href="/">Home</a></li>
-                                                 <li>
-                                                     <a href="#" className="fh5co-sub-ddown">Books</a>
-                                                     <ul className="fh5co-sub-menu">
-                                                         <li><a href="#">Adventure</a></li>
-                                                         <li><a href="#">Mystery &amp; HTML5</a></li>
-                                                         <li><a href="#">Kids</a></li>
-                                                         <li><a href="#">Comedy</a></li>
-                                                         <li><a href="#">Romance</a></li>
-                                                     </ul>
-                                                 </li>
                                                  <li><Link to='/artistprofilepage'>MyProfile</Link></li>
-                                                 <li><Link to="#">Artists</Link></li>
-                                                 <li><a href="#">About Us</a></li>
-                                                 <li><a href="#">Contact Us</a></li>
+                                                 <li><Link to='/artistdisplayprofile'>Display Profile</Link></li>
                                                  <li><Link to='/artistuploadbooks'>Upload Books</Link></li>
                                                  <li><Link to='#'>Logout</Link></li>
                                              </ul>
@@ -349,20 +323,8 @@ class NewerHomePage extends Component {
                                         <nav id="fh5co-menu-wrap" role="navigation">
                                             <ul className="sf-menu" id="fh5co-primary-menu">
                                                 <li className="active"><a href="/">Home</a></li>
-                                                <li>
-                                                    <a href="#" className="fh5co-sub-ddown">Books</a>
-                                                    <ul className="fh5co-sub-menu">
-                                                        <li><a href="#">Adventure</a></li>
-                                                        <li><a href="#">Mystery &amp; HTML5</a></li>
-                                                        <li><a href="#">Kids</a></li>
-                                                        <li><a href="#">Comedy</a></li>
-                                                        <li><a href="#">Romance</a></li>
-                                                    </ul>
-                                                </li>
                                                 <li><Link to='/artistprofilepage'>MyProfile</Link></li>
-                                                <li><Link to="#">Artists</Link></li>
-                                                <li><a href="#">About Us</a></li>
-                                                <li><a href="#">Contact Us</a></li>
+                                                <li><Link to='/artistdisplayprofile'>Display Profile</Link></li>
                                                 <li><Link to='/artistuploadbooks'>Upload Books</Link></li>
                                                 <li><Link to='#'>Logout</Link></li>
                                             </ul>
@@ -449,20 +411,8 @@ class NewerHomePage extends Component {
                                         <nav id="fh5co-menu-wrap" role="navigation">
                                             <ul className="sf-menu" id="fh5co-primary-menu">
                                                 <li className="active"><a href="/">Home</a></li>
-                                                <li>
-                                                    <a href="#" className="fh5co-sub-ddown">Books</a>
-                                                    <ul className="fh5co-sub-menu">
-                                                        <li><a href="#">Adventure</a></li>
-                                                        <li><a href="#">Mystery &amp; HTML5</a></li>
-                                                        <li><a href="#">Kids</a></li>
-                                                        <li><a href="#">Comedy</a></li>
-                                                        <li><a href="#">Romance</a></li>
-                                                    </ul>
-                                                </li>
                                                 <li><Link to='/artistprofilepage'>MyProfile</Link></li>
-                                                <li><Link to="#">Artists</Link></li>
-                                                <li><a href="#">About Us</a></li>
-                                                <li><a href="#">Contact Us</a></li>
+                                                <li><Link to='/artistdisplayprofile'>Display Profile</Link></li>
                                                 <li><Link to='/artistuploadbooks'>Upload Books</Link></li>
                                                 <li><Link to='#'>Logout</Link></li>
                                             </ul>
@@ -674,7 +624,7 @@ class NewerHomePage extends Component {
                             <div className="fh5co-hero">
                                 <div className="container">
                                     <div className="row justify-content-md-center">
-                                       <BooksAdventure/>
+                                       <BooksAdventure getBookDetails={this.getBookDetails}/>
 
                                     </div>
                                 </div>
@@ -938,6 +888,92 @@ class NewerHomePage extends Component {
                     </div>
                 )}/>
 
+                <Route exact path="/artistdisplayprofile" render={() => (
+                    <div id="fh5co-wrapper">
+                        <div id="fh5co-page">
+                            <header id="fh5co-header-section" className="sticky-banner">
+                                <div className="container">
+                                    <div className="nav-header">
+                                        <a href="#" className="js-fh5co-nav-toggle fh5co-nav-toggle dark"/>
+                                        <h1 id="fh5co-logo"><a href="/">CraftOnelife</a></h1>
+
+                                        <nav id="fh5co-menu-wrap" role="navigation">
+                                            <ul className="sf-menu" id="fh5co-primary-menu">
+                                                <li className="active"><a href="/">Home</a></li>
+                                                <li><Link to='/artistprofilepage'>MyProfile</Link></li>
+                                                <li><Link to='/artistdisplayprofile'>Display Profile</Link></li>
+                                                <li><Link to='/artistuploadbooks'>Upload Books</Link></li>
+                                                <li><Link to='#'>Logout</Link></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </header>
+                            <div className="fh5co-hero">
+                                <div className="container">
+                                    <div className="row justify-content-md-center">
+                                       <ArtistDisplayProfile/>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer>
+                                <div id="footer">
+                                    <div className="container">
+                                        <div className="row row-bottom-padded-md">
+                                            <div className="col-md-6 col-sm-6 col-xs-12 fh5co-footer-link">
+                                                <h3>CRAFTONELIFE</h3>
+                                                <p>Far far away, behind the word mountains, far from the countries
+                                                    Vokalia and
+                                                    Consonantia, there live the blind texts.</p>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Shop</h3>
+                                                <ul>
+                                                    <li><a href="#">By Genre</a></li>
+                                                    <li><a href="#">By Taste</a></li>
+                                                    <li><a href="#">By Price</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Company</h3>
+                                                <ul>
+                                                    <li><a href="#">About</a></li>
+                                                    <li><a href="#">Team</a></li>
+                                                    <li><a href="#">Locations</a></li>
+                                                    <li><a href="#">Blog</a></li>
+                                                    <li><a href="#">Press</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Customer Care</h3>
+                                                <ul>
+                                                    <li><a href="#">Refunds/Returns</a></li>
+                                                    <li><a href="#">Shipping Policy</a></li>
+                                                    <li><a href="#">FAQ</a></li>
+                                                    <li><a href="#">Contact Us</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6 col-md-offset-3 text-center">
+                                                <p className="fh5co-social-icons">
+                                                    <a href="#"><i className="icon-twitter2"/></a>
+                                                    <a href="#"><i className="icon-facebook2"/></a>
+                                                    <a href="#"><i className="icon-instagram"/></a>
+                                                    <a href="#"><i className="icon-dribbble2"/></a>
+                                                    <a href="#"><i className="icon-youtube"/></a>
+                                                </p>
+                                                <p>Copyright 2017. All Rights Reserved. <br/>Made with <i
+                                                    className="icon-heart3"/> by Rajvi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+
+                        </div>
+                    </div>
+                )}/>
 
                 <Route exact path="/signup" render={() => (
                     <div id="fh5co-wrapper">
@@ -1141,111 +1177,10 @@ class NewerHomePage extends Component {
 
 
 
-            <Route exact path="/bookdetails" render={() => (
-
-            <div id="fh5co-wrapper">
-                <div id="fh5co-page">
-                    <header id="fh5co-header-section" className="sticky-banner">
-                        <div className="container">
-                            <div className="nav-header">
-                                <a href="#" className="js-fh5co-nav-toggle fh5co-nav-toggle dark"/>
-                                <h1 id="fh5co-logo"><a href="/">CraftOnelife</a></h1>
-
-                                <nav id="fh5co-menu-wrap" role="navigation">
-                                    <ul className="sf-menu" id="fh5co-primary-menu">
-                                        <li className="active"><a href="/">Home</a></li>
-                                        <li>
-                                            <a href="#" className="fh5co-sub-ddown">Books</a>
-                                            <ul className="fh5co-sub-menu">
-                                                <li><a href="#">Adventure</a></li>
-                                                <li><a href="#">Mystery &amp; HTML5</a></li>
-                                                <li><a href="#">Kids</a></li>
-                                                <li><a href="#">Comedy</a></li>
-                                                <li><a href="#">Romance</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Clients</a></li>
-                                        <li><Link to="/artists">Artists</Link></li>
-                                        <li><Link to="/aboutus">About Us</Link></li>
-                                        <li><a href="#">Contact Us</a></li>
-                                        <li><Link to="/login">Login</Link></li>
-                                        <li><Link to='/signup'>Signup</Link></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </header>
-                    <div className="fh5co-hero">
-                        <div className="container">
-
-                            <ContactUs/>
-
-
-                        </div>
-                    </div>
-                    <footer>
-                        <div id="footer">
-                            <div className="container">
-                                <div className="row row-bottom-padded-md">
-                                    <div className="col-md-6 col-sm-6 col-xs-12 fh5co-footer-link">
-                                        <h3>CRAFTONELIFE</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries
-                                            Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                    </div>
-                                    <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-                                        <h3>Shop</h3>
-                                        <ul>
-                                            <li><a href="#">By Genre</a></li>
-                                            <li><a href="#">By Taste</a></li>
-                                            <li><a href="#">By Price</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-                                        <h3>Company</h3>
-                                        <ul>
-                                            <li><a href="#">About</a></li>
-                                            <li><a href="#">Team</a></li>
-                                            <li><a href="#">Locations</a></li>
-                                            <li><a href="#">Blog</a></li>
-                                            <li><a href="#">Press</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
-                                        <h3>Customer Care</h3>
-                                        <ul>
-                                            <li><a href="#">Refunds/Returns</a></li>
-                                            <li><a href="#">Shipping Policy</a></li>
-                                            <li><a href="#">FAQ</a></li>
-                                            <li><a href="#">Contact Us</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-6 col-md-offset-3 text-center">
-                                        <p className="fh5co-social-icons">
-                                            <a href="#"><i className="icon-twitter2"/></a>
-                                            <a href="#"><i className="icon-facebook2"/></a>
-                                            <a href="#"><i className="icon-instagram"/></a>
-                                            <a href="#"><i className="icon-dribbble2"/></a>
-                                            <a href="#"><i className="icon-youtube"/></a>
-                                        </p>
-                                        <p>Copyright 2017. All Rights Reserved. <br/>Made with <i
-                                            className="icon-heart3"/> by Rajvi</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-
-                </div>
-            </div>
-        )}/>
 
 
 
-
-                <Route exact path="/bookdetails" render={() => (
+                <Route exact path="/getbookdetails" render={() => (
 
                     <div id="fh5co-wrapper">
                         <div id="fh5co-page">
@@ -1282,7 +1217,7 @@ class NewerHomePage extends Component {
                             <div className="fh5co-hero">
                                 <div className="container">
 
-                                    <BookDetails/>
+                                    <BookDetails details={this.state.bookDetails}/>
 
 
                                 </div>

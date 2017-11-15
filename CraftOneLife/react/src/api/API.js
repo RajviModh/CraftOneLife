@@ -95,7 +95,7 @@ export const getBookDetails = (payload) =>
         body: JSON.stringify(payload)
     }).then(res => res.json())
         .then(res =>{
-            alert("Response in API "+JSON.stringify(res));
+            //alert("Response in API "+JSON.stringify(res));
             return res;
         })
         .catch(error => {
@@ -120,3 +120,25 @@ export const fetchUserProfile = (payload) =>
             return error;
         });
 
+
+
+
+export const addToCart = (payload) => {
+    return fetch(`${api}/addToCart`, {
+            method: 'POST',
+            headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }
+    ).then(res => res.json())
+        .then(res => {
+            alert("in api response : "+JSON.stringify(res));
+            return res;
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+};

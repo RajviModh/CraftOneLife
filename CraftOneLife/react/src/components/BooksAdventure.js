@@ -6,27 +6,65 @@ import Typography from 'material-ui/Typography';
 
 class BooksAdventure extends Component{
 
-    constructor() {
-        super();
-        this.state = {
-            images: []
-        };
-    }
-
-    componentDidMount() {
-        API.getImages()
-            .then((data) => {
-                alert(JSON.stringify(data));
-                this.setState({
-                    images: data
-                });
-            });
+    state={
+        books:[],
+        op:0
     };
 
+
+    componentDidMount() {
+
+        API.getBookDetails()
+            .then((res) => {
+                //alert(JSON.stringify(res));
+                this.setState({
+                    books: res.data
+                });
+            });
+
+
+    };
+
+    addToCart = (bookdata) => {
+        API.addToCart(bookdata)
+            .then((res) => {
+                alert("back in newer homepage : " + JSON.stringify(res));
+                if (res.status === '201') {
+                    this.setState({
+                        isLoggedIn: true,
+                        message: "Welcome to my App..!!",
+                        //username: userdata.username
+                    });
+                    //this.props.history.push("/artistwelcomepage");
+                } else if (res.status === '401') {
+                    this.setState({
+                        isLoggedIn: false,
+                        message: "Wrong username or password. Try again..!!"
+                    });
+                }
+            });
+    };
     render() {
         return (
-            <div>
-                <ImageGridList images={this.state.images}/>
+            <div className="row justify-content-md-center">
+                <div className="col-md-8">
+
+                    { this.state.books.map(tile => (
+
+                        <div>
+                            {tile.bookName}
+                        <img src={"data:image/jpeg;base64,"+tile.bookTilePath} height={100} width={200} alt={tile.bookTilePath}/>
+                            <button onClick={()=>this.props.getBookDetails(tile)}></button>
+                            <button onClick={()=>this.addToCart(tile)}>Add To Cart</button>
+                        </div>
+
+
+                    ))}
+                    {this.state.op}
+                    <button onClick={()=>this.setState({op:this.state.op+1})}></button>
+
+
+                </div>
             </div>
         );
     }
