@@ -12,6 +12,7 @@ var login = require('./routes/login');
 var signup = require('./routes/signup');
 var files = require('./routes/files');
 var userprofile = require('./routes/userprofile');
+var bookdetails = require('./routes/getbookdetails');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/', index);
 app.post('/doSignUp',signup.doSignUp);
 app.use('/files',files);
 app.post('/saveUserProfile',userprofile.saveUserProfile);
+app.post('/getBookDetails',bookdetails.getBookDetails);
 app.post('/login',function(req, res,next) {
     console.log("username in app" + JSON.stringify(req.body));
     passport.authenticate('login', function(err, user) {

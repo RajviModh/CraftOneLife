@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var mysql=require("./mysql");
+var glob = require('glob');
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -17,6 +19,37 @@ var storage = multer.diskStorage({
 });
 
 var upload = multer({storage:storage});
+
+
+
+
+/* GET users listing. */
+router.get('/', function (req, res, next) {
+    console.log("in node list files");
+    var resArr = [];
+
+    glob("public/uploads/*.*", function (er, files) {
+
+        var resArr = files.map(function (file) {
+            var imgJSON = {};
+            imgJSON.img = 'uploads/'+file.split('/')[2];
+            imgJSON.cols = 2  ;
+            return imgJSON;
+        });
+
+        console.log(resArr);
+        res.status(200).send(resArr);
+    });
+
+});
+
+
+
+
+
+
+
+
 
 router.post('/upload', upload.any(), function (req, res, next) {
     var flag = true;

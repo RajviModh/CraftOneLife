@@ -77,3 +77,30 @@ export const saveUserProfile = (payload) =>
             console.log("This is error in user profile update ",error);
             return error;
         });
+
+
+export const getImages = () =>
+    fetch(`${api}/files`)
+        .then(res => res.json())
+        .catch(error => {
+            console.log("This is error.");
+            return error;
+        });
+
+export const getBookDetails = (payload) =>
+    fetch(`${api}/getBookDetails`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            alert("Response in API "+JSON.stringify(res));
+            return res;
+        })
+        .catch(error => {
+            console.log("There is error in getting book details ",error);
+            return error;
+        });
