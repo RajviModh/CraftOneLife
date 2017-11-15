@@ -14,11 +14,35 @@ class ArtistProfilePage extends Component{
     };
 
     componentWillMount(){
+         API.fetchUserProfile({}).then((response) => {
+             alert("fetch profile response" + JSON.stringify(response.data))
+             this.setState({
+                 //profile_pic:response.data.profile_pic,
+                 fname:response.data.fname,
+                 lname:response.data.lname,
+                 contact_no:response.data.contact_no,
+                 email: response.data.email,
+                 about_me: response.data.about_me
+             })
+             console.log("current state ",this.state)
+         });
 
     };
     saveUserProfile = (userdata) => {
-        console.log("I am going to save profile")
-        API.saveUserProfile(userdata)
+        alert("I am going to save profile" + JSON.stringify(userdata))
+        const payload = new FormData();
+        payload.append('mypic', this.refs.mypic.files[0]);
+        payload.append('fname',this.state.fname)
+        payload.append('lname',this.state.lname)
+        payload.append('email',this.state.email)
+        payload.append('contact_no',this.state.contact_no)
+        payload.append('about_me',this.state.about_me)
+
+
+
+        //var data = {userdata:userdata,payload:payload}
+
+        API.saveUserProfile(payload)
             .then((status) => {
                 console.log("response after saving profile ",status)
                 if (status.status === '201') {

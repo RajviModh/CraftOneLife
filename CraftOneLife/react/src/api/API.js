@@ -61,23 +61,21 @@ export const uploadBook = (payload) =>
         return error;
     })
 export const saveUserProfile = (payload) =>
-    fetch(`${api}/saveUserProfile`, {
+    fetch(`${api}/saveUserProfile/upload`, {
         method: 'POST',
         headers: {
-            ...headers,
-            'Content-Type': 'application/json'
+            'path':'./public/uploads/Profile_pics/'
         },
-        body: JSON.stringify(payload)
+        body: payload
     }).then(res => res.json())
         .then(res =>{
-            console.log("Response in API ",res)
+            console.log("Response in API ",res);
             return res;
         })
         .catch(error => {
             console.log("This is error in user profile update ",error);
             return error;
         });
-
 
 export const getImages = () =>
     fetch(`${api}/files`)
@@ -104,3 +102,21 @@ export const getBookDetails = (payload) =>
             console.log("There is error in getting book details ",error);
             return error;
         });
+
+export const fetchUserProfile = (payload) =>
+    fetch(`${api}/getUserProfile`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            return res;
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+

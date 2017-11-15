@@ -13,6 +13,7 @@ var signup = require('./routes/signup');
 var files = require('./routes/files');
 var userprofile = require('./routes/userprofile');
 var bookdetails = require('./routes/getbookdetails');
+var getartistprofile = require('./routes/getartistprofile');
 
 var app = express();
 
@@ -30,12 +31,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/getUserProfile',getartistprofile.fetchUserProfile);
 
 app.use('/', index);
 app.post('/doSignUp',signup.doSignUp);
 app.use('/files',files);
-app.post('/saveUserProfile',userprofile.saveUserProfile);
+app.use('/saveUserProfile',userprofile);
 app.post('/getBookDetails',bookdetails.getBookDetails);
+
 app.post('/login',function(req, res,next) {
     console.log("username in app" + JSON.stringify(req.body));
     passport.authenticate('login', function(err, user) {
