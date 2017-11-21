@@ -14,7 +14,7 @@ export const doLogin = (payload) => {
         body: JSON.stringify(payload)
     }).then(res => res.json())
         .then(res => {
-            alert("back in API  : " + JSON.stringify(res));
+            //alert("back in API  : " + JSON.stringify(res));
             return res;
         })
         .catch(error => {
@@ -47,7 +47,8 @@ export const uploadBook = (payload) =>
             body: payload,
             headers: {
                 'path': payload.get('path')
-            }
+            },
+            credentials:'include'
         }
     ).then(res => res.json())
         .then(res => {
@@ -66,6 +67,7 @@ export const saveUserProfile = (payload) =>
         headers: {
             'path':'./public/uploads/Profile_pics/'
         },
+        credentials:'include',
         body: payload
     }).then(res => res.json())
         .then(res =>{
@@ -92,6 +94,7 @@ export const getBookDetails = (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
+        credentials:'include',
         body: JSON.stringify(payload)
     }).then(res => res.json())
         .then(res =>{
@@ -110,6 +113,7 @@ export const fetchUserProfile = (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
+        credentials:'include',
         body: JSON.stringify(payload)
     }).then(res => res.json())
         .then(res =>{
@@ -142,3 +146,19 @@ export const addToCart = (payload) => {
             return error;
         });
 };
+
+export const doLogout = () =>
+    fetch(`${api}/logout`, {
+        method: 'POST',
+        headers: {
+            ...headers
+        },
+        credentials:'include'
+    }).then(res => {
+        alert("in api response : "+JSON.stringify(res));
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });

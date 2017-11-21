@@ -14,7 +14,8 @@ var addToCart = function(req,res) {
                 if(results.length>0)
                 {
                     var qty=results[0].quantity+1;
-                    var updateCart="update cart set quantity="+qty+" where user_id=1 and book_id="+req.body.bookId;
+                    //var updateCart="update cart set quantity="+qty+" where user_id="+req.session.user+" and book_id="+req.body.bookId;
+                    //var updateCart="update cart set quantity="+qty+" where user_id="+req.session.user+" and book_id="+req.body.bookId;
                     mysql.insertData(function (err, results) {
 
 
@@ -27,7 +28,7 @@ var addToCart = function(req,res) {
                 else
                 {
                     //var qty=results[0].quantity+1;
-                    var insertcart="insert into cart values('"++" where user_id=1 and book_id="+req.body.bookId;
+                   // var insertcart="insert into cart values('"++" where user_id=1 and book_id="+req.body.bookId;
                     mysql.insertData(function (err, results) {
 
 

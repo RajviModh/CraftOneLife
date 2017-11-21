@@ -37,15 +37,32 @@ class NewerHomePage extends Component {
     handleSubmit = (userdata) => {
         API.doLogin(userdata)
             .then((res) => {
-                alert("back in newer homepage : " + JSON.stringify(res));
+                //alert("back in newer homepage : " + JSON.stringify(res.results[0].user_type));
                 if (res.status === '201') {
-                    this.setState({
-                        isLoggedIn: true,
-                        message: "Welcome to my App..!!",
-                        //username: userdata.username
-                    });
-                    this.props.history.push("/artistwelcomepage");
-                } else if (res.status === '401') {
+                    alert("in 201");
+                    var user=res.results[0];
+
+                    if(user.is_Approved===1 && user.user_type==="H"){
+                        alert("in H");
+                        this.setState({
+                            isLoggedIn: true
+                        });
+                        this.props.history.push("/artistwelcomepage");
+                    }
+                    else if (user.user_type==="A"){
+                        alert("in A");
+                        this.setState({
+                            isLoggedIn: true
+                        });
+                        this.props.history.push("/adminwelcomepage");
+                    }
+                    else {
+                        alert("Your application is being reviewed . Please check back again later");
+                    }
+
+
+
+                } else {
                     this.setState({
                         isLoggedIn: false,
                         message: "Wrong username or password. Try again..!!"
@@ -79,6 +96,20 @@ class NewerHomePage extends Component {
                 }
 
             })
+    };
+
+
+    handleLogout = () => {
+        alert('logout called');
+        API.doLogout()
+            .then((status) => {
+                if(status === 201){
+                    this.setState({
+                        isLoggedIn: false
+                    });
+                    this.props.history.push("/");
+                }
+            });
     };
 
     render() {
@@ -238,7 +269,7 @@ class NewerHomePage extends Component {
                                                  <li><Link to='/artistprofilepage'>MyProfile</Link></li>
                                                  <li><Link to='/artistdisplayprofile'>Display Profile</Link></li>
                                                  <li><Link to='/artistuploadbooks'>Upload Books</Link></li>
-                                                 <li><Link to='#'>Logout</Link></li>
+                                                 <li><a onClick={()=>this.handleLogout()}>Logout</a></li>
                                              </ul>
                                          </nav>
                                      </div>
