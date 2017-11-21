@@ -162,3 +162,35 @@ export const doLogout = () =>
             console.log("This is error");
             return error;
         });
+
+export const getusersforapproval = (payload) =>
+    fetch(`${api}/admin/getallusers`, {
+        method: 'GET',
+        headers: {
+            ...headers
+        },
+        credentials:'include'
+    }).then(res => {
+            alert('response from server getusersforapproval', res.data);
+            return res.data;
+        })
+        .catch(error => {
+            console.log("This is error in fileupload API");
+            return error;
+        });
+
+export const approveuser = (payload) =>
+    fetch(`${api}/admin/approveuser`, {
+        method: 'POST',
+        headers: {
+            ...headers
+        },
+        credentials:'include'
+    }).then(res => {
+            alert('response from server approveuser', res.data);
+            return res.data;
+        })
+        .catch(error => {
+            console.log("This is error in fileupload API");
+            return error;
+        });

@@ -10,6 +10,9 @@ import AboutUs from "./AboutUs";
 import ContactUs from "./ContactUs";
 import Artists from "./Artists";
 import ArtistDetails from './ArtistDetails';
+import AdminWelcomePage from './AdminWelcomePage';
+import AdminApproveBooks from './AdminApproveBooks';
+import AdminApproveUsers from './AdminApproveUsers';
 import ArtistWelcomePage from './ArtistWelcomePage';
 import ArtistUploadBooks from './ArtistUploadBooks';
 import ArtistProfilePage from './ArtistProfilePage';
@@ -41,7 +44,7 @@ class NewerHomePage extends Component {
                 if (res.status === '201') {
                     alert("in 201");
                     var user=res.results[0];
-
+                    localStorage.setItem("user_id",res.results[0].user_id);
                     if(user.is_Approved===1 && user.user_type==="H"){
                         alert("in H");
                         this.setState({
@@ -55,6 +58,13 @@ class NewerHomePage extends Component {
                             isLoggedIn: true
                         });
                         this.props.history.push("/adminwelcomepage");
+                    }
+                    else if (user.user_type==="U"){
+                        alert("in U");
+                        this.setState({
+                            isLoggedIn: true
+                        });
+                        this.props.history.push("/");
                     }
                     else {
                         alert("Your application is being reviewed . Please check back again later");
@@ -616,6 +626,274 @@ class NewerHomePage extends Component {
 
                         </div>
                     </div>
+                )}/>
+
+
+
+                <Route exact path="/adminwelcomepage" render={() => (
+
+                    <div id="fh5co-wrapper">
+                        <div id="fh5co-page">
+                            <header id="fh5co-header-section" className="sticky-banner">
+                                <div className="container">
+                                    <div className="nav-header">
+                                        <a href="#" className="js-fh5co-nav-toggle fh5co-nav-toggle dark"/>
+                                        <h1 id="fh5co-logo"><a href="/">CraftOnelife</a></h1>
+
+                                        <nav id="fh5co-menu-wrap" role="navigation">
+                                            <ul className="sf-menu" id="fh5co-primary-menu">
+                                                <li className="active"><a href="/">Home</a></li>
+                                                <li><Link to='/adminapproveusers'>Approve Users</Link></li>
+                                                <li><Link to='/adminapprovebooks'>Approve Books</Link></li>
+                                                <li><a onClick={()=>this.handleLogout()}>Logout</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </header>
+                            <div className="fh5co-hero">
+                                <div className="container">
+                                    <div className="row justify-content-md-center">
+                                        <AdminWelcomePage/>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer>
+                                <div id="footer">
+                                    <div className="container">
+                                        <div className="row row-bottom-padded-md">
+                                            <div className="col-md-6 col-sm-6 col-xs-12 fh5co-footer-link">
+                                                <h3>CRAFTONELIFE</h3>
+                                                <p>Far far away, behind the word mountains, far from the countries
+                                                    Vokalia and
+                                                    Consonantia, there live the blind texts.</p>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Shop</h3>
+                                                <ul>
+                                                    <li><a href="#">By Genre</a></li>
+                                                    <li><a href="#">By Taste</a></li>
+                                                    <li><a href="#">By Price</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Company</h3>
+                                                <ul>
+                                                    <li><a href="#">About</a></li>
+                                                    <li><a href="#">Team</a></li>
+                                                    <li><a href="#">Locations</a></li>
+                                                    <li><a href="#">Blog</a></li>
+                                                    <li><a href="#">Press</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Customer Care</h3>
+                                                <ul>
+                                                    <li><a href="#">Refunds/Returns</a></li>
+                                                    <li><a href="#">Shipping Policy</a></li>
+                                                    <li><a href="#">FAQ</a></li>
+                                                    <li><a href="#">Contact Us</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6 col-md-offset-3 text-center">
+                                                <p className="fh5co-social-icons">
+                                                    <a href="#"><i className="icon-twitter2"/></a>
+                                                    <a href="#"><i className="icon-facebook2"/></a>
+                                                    <a href="#"><i className="icon-instagram"/></a>
+                                                    <a href="#"><i className="icon-dribbble2"/></a>
+                                                    <a href="#"><i className="icon-youtube"/></a>
+                                                </p>
+                                                <p>Copyright 2017. All Rights Reserved. <br/>Made with <i
+                                                    className="icon-heart3"/> by Rajvi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+
+                        </div>
+                    </div>
+
+                )}/>
+
+
+                <Route exact path="/adminapproveusers" render={() => (
+
+                    <div id="fh5co-wrapper">
+                        <div id="fh5co-page">
+                            <header id="fh5co-header-section" className="sticky-banner">
+                                <div className="container">
+                                    <div className="nav-header">
+                                        <a href="#" className="js-fh5co-nav-toggle fh5co-nav-toggle dark"/>
+                                        <h1 id="fh5co-logo"><a href="/">CraftOnelife</a></h1>
+
+                                        <nav id="fh5co-menu-wrap" role="navigation">
+                                            <ul className="sf-menu" id="fh5co-primary-menu">
+                                                <li className="active"><a href="/">Home</a></li>
+                                                <li><Link to='/adminapproveusers'>Approve Users</Link></li>
+                                                <li><Link to='/adminapprovebooks'>Approve Books</Link></li>
+                                                <li><a onClick={()=>this.handleLogout()}>Logout</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </header>
+                            <div className="fh5co-hero">
+                                <div className="container">
+                                    <div className="row justify-content-md-center">
+                                        <AdminApproveUsers/>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer>
+                                <div id="footer">
+                                    <div className="container">
+                                        <div className="row row-bottom-padded-md">
+                                            <div className="col-md-6 col-sm-6 col-xs-12 fh5co-footer-link">
+                                                <h3>CRAFTONELIFE</h3>
+                                                <p>Far far away, behind the word mountains, far from the countries
+                                                    Vokalia and
+                                                    Consonantia, there live the blind texts.</p>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Shop</h3>
+                                                <ul>
+                                                    <li><a href="#">By Genre</a></li>
+                                                    <li><a href="#">By Taste</a></li>
+                                                    <li><a href="#">By Price</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Company</h3>
+                                                <ul>
+                                                    <li><a href="#">About</a></li>
+                                                    <li><a href="#">Team</a></li>
+                                                    <li><a href="#">Locations</a></li>
+                                                    <li><a href="#">Blog</a></li>
+                                                    <li><a href="#">Press</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Customer Care</h3>
+                                                <ul>
+                                                    <li><a href="#">Refunds/Returns</a></li>
+                                                    <li><a href="#">Shipping Policy</a></li>
+                                                    <li><a href="#">FAQ</a></li>
+                                                    <li><a href="#">Contact Us</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6 col-md-offset-3 text-center">
+                                                <p className="fh5co-social-icons">
+                                                    <a href="#"><i className="icon-twitter2"/></a>
+                                                    <a href="#"><i className="icon-facebook2"/></a>
+                                                    <a href="#"><i className="icon-instagram"/></a>
+                                                    <a href="#"><i className="icon-dribbble2"/></a>
+                                                    <a href="#"><i className="icon-youtube"/></a>
+                                                </p>
+                                                <p>Copyright 2017. All Rights Reserved. <br/>Made with <i
+                                                    className="icon-heart3"/> by Rajvi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+
+                        </div>
+                    </div>
+
+                )}/>
+
+
+                <Route exact path="/adminapprovebooks" render={() => (
+
+                    <div id="fh5co-wrapper">
+                        <div id="fh5co-page">
+                            <header id="fh5co-header-section" className="sticky-banner">
+                                <div className="container">
+                                    <div className="nav-header">
+                                        <a href="#" className="js-fh5co-nav-toggle fh5co-nav-toggle dark"/>
+                                        <h1 id="fh5co-logo"><a href="/">CraftOnelife</a></h1>
+
+                                        <nav id="fh5co-menu-wrap" role="navigation">
+                                            <ul className="sf-menu" id="fh5co-primary-menu">
+                                                <li className="active"><a href="/">Home</a></li>
+                                                <li><Link to='/adminapproveusers'>Approve Users</Link></li>
+                                                <li><Link to='/adminapprovebooks'>Approve Books</Link></li>
+                                                <li><a onClick={()=>this.handleLogout()}>Logout</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </header>
+                            <div className="fh5co-hero">
+                                <div className="container">
+                                    <div className="row justify-content-md-center">
+                                        <AdminApproveBooks/>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer>
+                                <div id="footer">
+                                    <div className="container">
+                                        <div className="row row-bottom-padded-md">
+                                            <div className="col-md-6 col-sm-6 col-xs-12 fh5co-footer-link">
+                                                <h3>CRAFTONELIFE</h3>
+                                                <p>Far far away, behind the word mountains, far from the countries
+                                                    Vokalia and
+                                                    Consonantia, there live the blind texts.</p>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Shop</h3>
+                                                <ul>
+                                                    <li><a href="#">By Genre</a></li>
+                                                    <li><a href="#">By Taste</a></li>
+                                                    <li><a href="#">By Price</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Company</h3>
+                                                <ul>
+                                                    <li><a href="#">About</a></li>
+                                                    <li><a href="#">Team</a></li>
+                                                    <li><a href="#">Locations</a></li>
+                                                    <li><a href="#">Blog</a></li>
+                                                    <li><a href="#">Press</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Customer Care</h3>
+                                                <ul>
+                                                    <li><a href="#">Refunds/Returns</a></li>
+                                                    <li><a href="#">Shipping Policy</a></li>
+                                                    <li><a href="#">FAQ</a></li>
+                                                    <li><a href="#">Contact Us</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6 col-md-offset-3 text-center">
+                                                <p className="fh5co-social-icons">
+                                                    <a href="#"><i className="icon-twitter2"/></a>
+                                                    <a href="#"><i className="icon-facebook2"/></a>
+                                                    <a href="#"><i className="icon-instagram"/></a>
+                                                    <a href="#"><i className="icon-dribbble2"/></a>
+                                                    <a href="#"><i className="icon-youtube"/></a>
+                                                </p>
+                                                <p>Copyright 2017. All Rights Reserved. <br/>Made with <i
+                                                    className="icon-heart3"/> by Rajvi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+
+                        </div>
+                    </div>
+
                 )}/>
 
 

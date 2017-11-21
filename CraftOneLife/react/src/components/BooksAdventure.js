@@ -7,8 +7,7 @@ import Typography from 'material-ui/Typography';
 class BooksAdventure extends Component{
 
     state={
-        books:[],
-        op:0
+        books:[]
     };
 
 
@@ -16,7 +15,7 @@ class BooksAdventure extends Component{
 
         API.getBookDetails()
             .then((res) => {
-                //alert(JSON.stringify(res));
+               // alert(JSON.stringify(res));
                 this.setState({
                     books: res.data
                 });
@@ -26,6 +25,7 @@ class BooksAdventure extends Component{
     };
 
     addToCart = (bookdata) => {
+        bookdata.user_id=localStorage.getItem("user_id");
         API.addToCart(bookdata)
             .then((res) => {
                 alert("back in newer homepage : " + JSON.stringify(res));
@@ -60,8 +60,8 @@ class BooksAdventure extends Component{
 
 
                     ))}
-                    {this.state.op}
-                    <button onClick={()=>this.setState({op:this.state.op+1})}></button>
+
+
 
 
                 </div>

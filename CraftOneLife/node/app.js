@@ -15,6 +15,7 @@ var userprofile = require('./routes/userprofile');
 var bookdetails = require('./routes/getbookdetails');
 var getartistprofile = require('./routes/getartistprofile');
 var addToCart = require('./routes/addtocart');
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -52,6 +53,7 @@ app.use('/files',files);
 app.use('/saveUserProfile',userprofile);
 app.post('/getBookDetails',bookdetails.getBookDetails);
 app.post('/addToCart',addToCart.addToCart);
+//app.use('/admin',admin);
 
 app.post('/login',function(req, res,next) {
     console.log("username in app" + JSON.stringify(req.body));
@@ -64,6 +66,8 @@ app.post('/login',function(req, res,next) {
             res.status(401).send();
         }
         req.session.user = user[0].email;
+        req.session.user_id = user[0].user_id;
+        console.log(req.session)
         console.log(req.session.user);
         console.log("session initialized");
         console.log("back in app.js" + JSON.stringify(user));
