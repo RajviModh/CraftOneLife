@@ -19,6 +19,7 @@ import ArtistProfilePage from './ArtistProfilePage';
 import ArtistDisplayProfile from './ArtistDisplayProfile';
 import BooksAdventure from './BooksAdventure';
 import BookDetails from './BookDetails';
+import UserCart from './UserCart';
 
 import DemoCarousel from './DemoCarousel';
 import clients from '../images/clients.png';
@@ -117,6 +118,7 @@ class NewerHomePage extends Component {
                     this.setState({
                         isLoggedIn: false
                     });
+                    localStorage.removeItem('user_id');
                     this.props.history.push("/");
                 }
             });
@@ -154,6 +156,7 @@ class NewerHomePage extends Component {
                                                 <li><Link to="/contactus">Contact Us</Link></li>
                                                 <li><Link to='/login'>Login</Link></li>
                                                 <li><Link to='/signup'>Signup</Link></li>
+                                                <li><Link to='/usercart'>Cart</Link></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -629,6 +632,107 @@ class NewerHomePage extends Component {
                 )}/>
 
 
+                <Route exact path="/usercart" render={() => (
+                    <div id="fh5co-wrapper">
+                        <div id="fh5co-page">
+                            <header id="fh5co-header-section" className="sticky-banner">
+                                <div className="container">
+                                    <div className="nav-header">
+                                        <a href="#" className="js-fh5co-nav-toggle fh5co-nav-toggle dark"/>
+                                        <h1 id="fh5co-logo"><a href="/">CraftOnelife</a></h1>
+
+                                        <nav id="fh5co-menu-wrap" role="navigation">
+                                            <ul className="sf-menu" id="fh5co-primary-menu">
+                                                <li className="active"><a href="/">Home</a></li>
+                                                <li>
+                                                    <a href="#" className="fh5co-sub-ddown">Books</a>
+                                                    <ul className="fh5co-sub-menu">
+                                                        <li><Link to="/bookadventure">Adventure</Link></li>
+                                                        <li><Link to="/bookdetails">Mystery</Link></li>
+                                                        <li><a href="#">Kids</a></li>
+                                                        <li><a href="#">Comedy</a></li>
+                                                        <li><a href="#">Romance</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Clients</a></li>
+                                                <li><Link to="/artists">Artists</Link></li>
+                                                <li><Link to="/aboutus">About Us</Link></li>
+                                                <li><Link to="/contactus">Contact Us</Link></li>
+                                                <li><Link to='/login'>Login</Link></li>
+                                                <li><Link to='/signup'>Signup</Link></li>
+                                                <li><Link to='/usercart'>Cart</Link></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </header>
+                            <div className="fh5co-hero">
+                                <div className="container">
+                                    <div className="row justify-content-md-center">
+                                        <UserCart/>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <footer>
+                                <div id="footer">
+                                    <div className="container">
+                                        <div className="row row-bottom-padded-md">
+                                            <div className="col-md-6 col-sm-6 col-xs-12 fh5co-footer-link">
+                                                <h3>CRAFTONELIFE</h3>
+                                                <p>Far far away, behind the word mountains, far from the countries
+                                                    Vokalia and
+                                                    Consonantia, there live the blind texts.</p>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Shop</h3>
+                                                <ul>
+                                                    <li><a href="#">By Genre</a></li>
+                                                    <li><a href="#">By Taste</a></li>
+                                                    <li><a href="#">By Price</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Company</h3>
+                                                <ul>
+                                                    <li><a href="#">About</a></li>
+                                                    <li><a href="#">Team</a></li>
+                                                    <li><a href="#">Locations</a></li>
+                                                    <li><a href="#">Blog</a></li>
+                                                    <li><a href="#">Press</a></li>
+                                                </ul>
+                                            </div>
+                                            <div className="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
+                                                <h3>Customer Care</h3>
+                                                <ul>
+                                                    <li><a href="#">Refunds/Returns</a></li>
+                                                    <li><a href="#">Shipping Policy</a></li>
+                                                    <li><a href="#">FAQ</a></li>
+                                                    <li><a href="#">Contact Us</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6 col-md-offset-3 text-center">
+                                                <p className="fh5co-social-icons">
+                                                    <a href="#"><i className="icon-twitter2"/></a>
+                                                    <a href="#"><i className="icon-facebook2"/></a>
+                                                    <a href="#"><i className="icon-instagram"/></a>
+                                                    <a href="#"><i className="icon-dribbble2"/></a>
+                                                    <a href="#"><i className="icon-youtube"/></a>
+                                                </p>
+                                                <p>Copyright 2017. All Rights Reserved. <br/>Made with <i
+                                                    className="icon-heart3"/> by Rajvi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+
+                        </div>
+                    </div>
+                )}/>
+
 
                 <Route exact path="/adminwelcomepage" render={() => (
 
@@ -932,10 +1036,10 @@ class NewerHomePage extends Component {
                             </header>
                             <div className="fh5co-hero">
                                 <div className="container">
-                                    <div className="row justify-content-md-center">
+
                                        <BooksAdventure getBookDetails={this.getBookDetails}/>
 
-                                    </div>
+
                                 </div>
                             </div>
                             <footer>

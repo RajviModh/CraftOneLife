@@ -15,7 +15,7 @@ class BooksAdventure extends Component{
 
         API.getBookDetails()
             .then((res) => {
-               // alert(JSON.stringify(res));
+                // alert(JSON.stringify(res));
                 this.setState({
                     books: res.data
                 });
@@ -47,19 +47,41 @@ class BooksAdventure extends Component{
     render() {
         return (
             <div className="row justify-content-md-center">
-                <div className="col-md-8">
+                <div className="col-md-12">
 
                     { this.state.books.map(tile => (
 
-                        <div>
-                            {tile.bookName}
-                        <img src={"data:image/jpeg;base64,"+tile.bookTilePath} height={100} width={200} alt={tile.bookTilePath}/>
-                            <button onClick={()=>this.props.getBookDetails(tile)}></button>
-                            <button onClick={()=>this.addToCart(tile)}>Add To Cart</button>
+
+                        <div className="col-md-3">
+                            <div className="list-group-item clearfix">
+                                <div className="pull-right">
+                                    <img src={"data:image/jpeg;base64,"+tile.bookTilePath} height={100} width={200} alt={tile.bookTilePath} />
+
+                                </div>
+                                <div className="pull-right" style={{textAlign:'center', width:200}}>
+
+                                    <h4 className="list-group-item-heading">NAME : {tile.bookName}</h4>
+                                    <p className="list-group-item-text">PRICE : $ {tile.bookPrice}</p>
+                                    <button className="btn btn-success btn-sm" onClick={()=>this.addToCart(tile)}> ADD TO CART </button>
+
+                                </div>
+                                >
+                                <div className="row">
+
+
+
+                                </div>
+
+
+
+
+
+                            </div>
+                            <br/>
                         </div>
-
-
                     ))}
+
+
 
 
 

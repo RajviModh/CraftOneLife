@@ -105,7 +105,6 @@ export const getBookDetails = (payload) =>
             console.log("There is error in getting book details ",error);
             return error;
         });
-
 export const fetchUserProfile = (payload) =>
     fetch(`${api}/getUserProfile`, {
         method: 'POST',
@@ -147,6 +146,7 @@ export const addToCart = (payload) => {
         });
 };
 
+
 export const doLogout = () =>
     fetch(`${api}/logout`, {
         method: 'POST',
@@ -170,27 +170,106 @@ export const getusersforapproval = (payload) =>
             ...headers
         },
         credentials:'include'
-    }).then(res => {
-            alert('response from server getusersforapproval', res.data);
-            return res.data;
+    }).then(res => res.json())
+        .then(res =>{
+            console.log('response from server get users for approval', res);
+            return res;
         })
         .catch(error => {
-            console.log("This is error in fileupload API");
+            console.log("This is error in get users for approval API");
             return error;
         });
+
+
+
+export const doHandleCartDelete = (payload) =>
+    fetch(`${api}/deleteBookQuantity`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            //alert("Response in API useCart"+JSON.stringify(res));
+            return res;
+        })
+        .catch(error => {
+            console.log("There is error in getting book details ",error);
+            return error;
+        });
+
 
 export const approveuser = (payload) =>
     fetch(`${api}/admin/approveuser`, {
         method: 'POST',
         headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body:JSON.stringify(payload)
+    }).then(res => {
+        alert('response from server approveuser', res.data);
+        return res.data;
+    })
+        .catch(error => {
+            console.log("This is error in fileupload API");
+            return error;
+        });
+export const getBooksForApproval = (payload) =>
+    fetch(`${api}/admin/getallbooks`, {
+        method: 'GET',
+        headers: {
             ...headers
         },
         credentials:'include'
-    }).then(res => {
-            alert('response from server approveuser', res.data);
-            return res.data;
+    }).then(res => res.json())
+        .then(res =>{
+            console.log('response from server get books for approval', res);
+            return res;
         })
         .catch(error => {
-            console.log("This is error in fileupload API");
+            console.log("This is error in ge books for approval API");
+            return error;
+        });
+
+export const approveBooks = (payload) =>
+    fetch(`${api}/admin/approvebook`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body:JSON.stringify(payload)
+    }).then(res => {
+        alert('response from server approvebooks', res.data);
+        return res.data;
+    })
+        .catch(error => {
+            console.log("This is error in approve books API");
+            return error;
+        });
+
+
+export const getCartDetails = (payload) =>
+    fetch(`${api}/userCart`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            //alert("Response in API useCart"+JSON.stringify(res));
+            return res;
+        })
+        .catch(error => {
+            console.log("There is error in getting book details ",error);
             return error;
         });

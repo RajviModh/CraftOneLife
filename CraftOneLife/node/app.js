@@ -16,6 +16,7 @@ var bookdetails = require('./routes/getbookdetails');
 var getartistprofile = require('./routes/getartistprofile');
 var addToCart = require('./routes/addtocart');
 var admin = require('./routes/admin');
+var cart = require('./routes/cart');
 
 var app = express();
 
@@ -53,7 +54,9 @@ app.use('/files',files);
 app.use('/saveUserProfile',userprofile);
 app.post('/getBookDetails',bookdetails.getBookDetails);
 app.post('/addToCart',addToCart.addToCart);
-//app.use('/admin',admin);
+app.post('/userCart',cart.userCart);
+app.post('/deleteBookQuantity',cart.deleteBookQuantity);
+app.use('/admin',admin);
 
 app.post('/login',function(req, res,next) {
     console.log("username in app" + JSON.stringify(req.body));
