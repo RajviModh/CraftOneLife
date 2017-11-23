@@ -5,7 +5,7 @@ var userCart = function(req,res) {
 
     console.log("in user cart", req.body.user_id);
 
-    var showCartDetails = "select cart.book_id, books.book_name,books.bookTilePath, books.book_desc,books.user_price, cart.quantity from cart inner join books where cart.book_id=books.book_id and cart.user_id="+req.body.user_id;
+    var showCartDetails = "select cart.book_id, books.book_name,books.bookTilePath, books.book_desc,cart.admin_price, cart.quantity from cart inner join books where cart.book_id=books.book_id and cart.user_id="+req.body.user_id;
     console.log("query is "+showCartDetails);
     try {
         mysql.insertData(function (err, results) {
@@ -23,7 +23,7 @@ var userCart = function(req,res) {
                         var data = {
                             bookId: results[i].book_id,
                             bookName: results[i].book_name,
-                            bookPrice: results[i].user_price,
+                            bookPrice: results[i].admin_price,
                             bookDesc: results[i].book_desc,
                             bookQty:results[i].quantity,
                             bookTilePath: (new Buffer(bitmap).toString('base64'))
@@ -31,6 +31,10 @@ var userCart = function(req,res) {
                         resultFiles.push(data);
                     }
                     res.status(201).json({status:'201',data:resultFiles});
+                }
+                else
+                {
+                    res.status(201).json({status:'201',data:[]});
                 }
             }
         }, showCartDetails)

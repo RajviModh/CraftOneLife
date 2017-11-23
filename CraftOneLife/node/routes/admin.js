@@ -112,7 +112,7 @@ router.post('/approvebook', function (req, res) {
 
 
     console.log("approvebooks",req.body);
-    var approveBooks = "update books set isApproved=1 where book_id='"+req.body.id+"'";
+    var approveBooks = "update books set isApproved=1,admin_price="+parseInt(req.body.u.user_price)*1.2+" where book_id='"+req.body.u.book_id+"'";
 
     try {
 

@@ -23,11 +23,11 @@ class AdminApproveBooks extends Component{
         });
     }
 
-    addApprovedBooks(id)
+    addApprovedBooks(u)
     {
 
-        alert(id);
-        var data={id:id};
+        alert(u);
+        var data={u:u};
         API.approveBooks(data).then((res) => {
             alert("Book approved successfully");
             API.getBooksForApproval().then((res) => {
@@ -62,7 +62,7 @@ class AdminApproveBooks extends Component{
                             <div className="pull-right">
                                 <div className="row">
                                     <div className="col-xs-12">
-                                        <button className="btn btn-success"  onClick={()=>this.addApprovedBooks(u.book_id)}> APPROVE</button>
+                                        <button className="btn btn-success"  onClick={()=>this.addApprovedBooks(u)}> APPROVE</button>
                                         <button className="btn btn-danger"> REJECT</button>
 
 

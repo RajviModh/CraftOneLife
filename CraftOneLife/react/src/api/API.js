@@ -273,3 +273,62 @@ export const getCartDetails = (payload) =>
             console.log("There is error in getting book details ",error);
             return error;
         });
+
+
+
+export const doHandleCheckOut = (payload) =>
+    fetch(`${api}/proceedCheckout`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            //alert("Response in API useCart"+JSON.stringify(res));
+            return res;
+        })
+        .catch(error => {
+            console.log("There is error in getting book details ",error);
+            return error;
+        });
+
+export const doEmptyCart = (payload) =>
+    fetch(`${api}/emptyCheckout`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            alert("Response in API useCart"+JSON.stringify(res));
+            return res;
+        })
+        .catch(error => {
+            console.log("There is error in getting book details ",error);
+            return error;
+        });
+
+export const handleAddQuantity = (payload) =>
+    fetch(`${api}/`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            //alert("Response in API useCart"+JSON.stringify(res));
+            return res;
+        })
+        .catch(error => {
+            console.log("There is error in getting book details ",error);
+            return error;
+        });

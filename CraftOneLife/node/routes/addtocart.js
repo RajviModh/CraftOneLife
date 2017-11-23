@@ -41,18 +41,12 @@ var addToCart = function(req,res) {
 
                 }
 
-
-
-
-
             }
         }, checkCart)
 
     }
-
     catch(err){
         console.log(err);
     }
-
 };
 exports.addToCart=addToCart;

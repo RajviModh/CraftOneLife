@@ -15,6 +15,8 @@ var userprofile = require('./routes/userprofile');
 var bookdetails = require('./routes/getbookdetails');
 var getartistprofile = require('./routes/getartistprofile');
 var addToCart = require('./routes/addtocart');
+var proceedCheckout = require('./routes/proceedcheckout');
+
 var admin = require('./routes/admin');
 var cart = require('./routes/cart');
 
@@ -56,6 +58,9 @@ app.post('/getBookDetails',bookdetails.getBookDetails);
 app.post('/addToCart',addToCart.addToCart);
 app.post('/userCart',cart.userCart);
 app.post('/deleteBookQuantity',cart.deleteBookQuantity);
+app.post('/proceedCheckout',proceedCheckout.proceedCheckout);
+app.post('/emptyCheckout',proceedCheckout.emptyCheckout);
+
 app.use('/admin',admin);
 
 app.post('/login',function(req, res,next) {

@@ -7,31 +7,70 @@ class UserCart extends Component{
         cartList:[],
         quantity:'',
         bookId:'',
-        quantiy:''
+        quantiy:'',
+        total:0
     }
     componentWillMount() {
 
         this.getDetails();
 
+
     };
     getDetails = () =>{
         var user_id=localStorage.getItem("user_id");
         var payload={user_id:user_id};
+        alert("in get details");
         API.getCartDetails(payload)
         .then((res) => {
-          //  alert("back in handle cart delete response : " + JSON.stringify(res));
+          //alert("back in handle cart delete response : " + JSON.stringify(res));
             if(res.status==='201'){
+                alert("dgdgd");
                 this.setState({
                     cartList: res.data
-                })
+                });
+                var total=0;
+                for(var i=0;i<this.state.cartList.length;i++)
+                {
+                    alert(typeof this.state.cartList[i].bookPrice);
+                    var book = parseInt(this.state.cartList[i].bookPrice)*parseInt(this.state.cartList[i].bookQty);
+                    total+=book;
+                    //alert(this.state.cartList[i].price);
+                }
+                this.setState({total:total})
+                //this.state.total=total
+               // alert(this.state.total)
             }
     });
+    };
+
+
+
+    handleAddQuantity = (payload) =>{
+        var user_id=localStorage.getItem("user_id");
+        var payload={user_id:user_id, book_id:this.state.bookId};
+        console.log("in payload" + JSON.stringify(payload));
+        API.doHandleCartDelete(payload)
+            .then((res) => {
+                //  alert("back in handle cart delete response : " + JSON.stringify(res));
+                if (res.status === '201') {
+                    alert("Deleted succesfully");
+                }
+                else if (res.status === '401') {
+                    this.setState({
+                        message: JSON.stringify(res.errors)
+                    });
+                    console.log(this.state.message);
+
+                }
+
+            })
+
     };
 
     handleCartDelete = (payload) =>{
         var user_id=localStorage.getItem("user_id");
         var payload={user_id:user_id, book_id:this.state.bookId};
-        alert("in payload" + JSON.stringify(payload));
+       console.log("in payload" + JSON.stringify(payload));
         API.doHandleCartDelete(payload)
             .then((res) => {
               //  alert("back in handle cart delete response : " + JSON.stringify(res));
@@ -50,7 +89,65 @@ class UserCart extends Component{
 
     };
 
+    handleCheckOut = (data) => {
+        var user_id=localStorage.getItem("user_id");
+        var payload=[];
+        for(var i=0;i<this.state.cartList.length;i++){
+            var payloadArr={
+                book_id:data[i].bookId,
+                quantity:data[i].bookQty
+            };
+            payload.push(payloadArr);
+        }
+
+
+        var payload={total:this.state.total, user_id:user_id, payload:payload};
+        alert("in handlecheckout " +JSON.stringify(payload));
+
+        API.doHandleCheckOut(payload)
+            .then((res) => {
+                //  alert("back in handle cart delete response : " + JSON.stringify(res));
+                if (res.status === '201') {
+                    alert("Added succesfully");
+                    this.doEmptyCart();
+                }
+
+                else if (res.status === '401') {
+                    this.setState({
+                        message: JSON.stringify(res.errors)
+                    });
+                    console.log(this.state.message);
+
+                }
+
+            })
+
+    };
+    doEmptyCart = () =>{
+        var user_id=localStorage.getItem("user_id");
+        var payload={user_id:user_id};
+        alert("in payload" + JSON.stringify(payload));
+        API.doEmptyCart(payload)
+            .then((res) => {
+                 alert("back in handle cart delete response : " + JSON.stringify(res));
+                if (res.status === '201') {
+                    alert("Deleted succesfully");
+                    this.getDetails();
+                }
+                else if (res.status === '401') {
+                    this.setState({
+                        message: JSON.stringify(res.errors)
+                    });
+                    console.log(this.state.message);
+
+                }
+
+            })
+
+    };
+
     render() {
+        var total=0;
         console.log("in render _--------" + this.state.cartList);
         return (
             <div className="col-sm-10 col-md-10">
@@ -77,7 +174,13 @@ class UserCart extends Component{
                                 <div className="pull-left">
                                     <h4 className="list-group-item-heading">{tile.bookName}</h4>
                                     <p className="list-group-item-text">{tile.bookDesc}</p>
+                                    <p className="list-group-item-text">{tile.bookPrice}</p>
+                                    <p className="list-group-item-text">{tile.bookQty}</p>
+
+                                    <p className="list-group-item-text">{tile.price}</p>
+
                                 </div>
+
                                 <div className="pull-right" style={{width:300}}>
 
 
@@ -96,7 +199,7 @@ class UserCart extends Component{
                                     <button
                                         className="btn btn-success"
                                         type="button"
-                                        onClick={() => this.handleCartDelete(this.state)}>
+                                        onClick={() => this.handleAddQuantity(this.state)}>
                                         +
                                     </button>
                                     <button
@@ -113,6 +216,7 @@ class UserCart extends Component{
 
 
 
+
                                 </div>
 
 
@@ -122,64 +226,18 @@ class UserCart extends Component{
                             </div>
                             <br/>
                         </div>
-                    ))}
 
-                        {/*{this.state.cartList.map((book, i) =>*/}
-                            {/*<tr key={i}>{*/}
-                                {/*(*/}
+                    ))
 
-
-                                        {/*{book.book_name}&nbsp; {book.book_desc}*/}
-
-
-                                {/*)}*/}
-                                {/*<td style={{textAlign:'right'}}>*/}
-                                {/*<div style={{textAlign:'right'}}>*/}
-                                {/*<button*/}
-                                    {/*className="btn btn-success"*/}
-                                    {/*type="button"*/}
-                                    {/*onClick={() => this.handleCartDelete(this.state)}>*/}
-                                    {/*+*/}
-                                {/*</button>*/}
-                                {/*&nbsp;*/}
-                                {/*<input*/}
-                                    {/*className="form-control"*/}
-                                    {/*type="text"*/}
-                                    {/*label="quantity"*/}
-                                    {/*placeholder=""*/}
-                                    {/*style={{width:30}}*/}
-                                    {/*value={this.state.quantity}*/}
-                                    {/*onChange={(event) => {*/}
-                                        {/*this.setState({*/}
-                                            {/*quantity: event.target.value*/}
-                                        {/*});*/}
-                                    {/*}}*/}
-                                {/*/>*/}
-
-                                {/*<button*/}
-                                    {/*className="btn btn-success"*/}
-                                    {/*type="button"*/}
-                                    {/*onClick={() => this.handleCartDelete(this.state)}>*/}
-                                    {/*-*/}
-                                {/*</button>*/}
-                                {/*&nbsp;*/}
-                                {/*<button*/}
-                                {/*className="btn btn-success"*/}
-                                {/*type="button"*/}
-                                {/*onClick={() => this.handleCartDelete(this.state)}>*/}
-                                {/*Delete*/}
-                            {/*</button>*/}
-                                {/*</div>*/}
-
-
-                        {/*)}*/}
-
+                    }
+                    <p className="list-group-item-text">total : $ {this.state.total}</p>
 
                         <br/>
 
 
 
                 </div>
+                <div ><button className="btn btn-success" onClick={()=>this.handleCheckOut(this.state.cartList)}>Proceed to checkout</button></div>
             </div>
         )
     }
