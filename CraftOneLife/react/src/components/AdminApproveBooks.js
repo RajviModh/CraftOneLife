@@ -55,7 +55,7 @@ class AdminApproveBooks extends Component{
 
                         <div className="list-group-item clearfix" >
                             <div className="pull-left">
-                                NAME : <a className="list-group-item-heading" href={'http://localhost:3001/uploads/'+u.book_name}>{u.book_name}</a>
+                                NAME : <a className="list-group-item-heading" href={'http://localhost:3001/uploads/'+u.book_path.split("/")[3]}>{u.book_name}</a>
 
                             </div>
 
