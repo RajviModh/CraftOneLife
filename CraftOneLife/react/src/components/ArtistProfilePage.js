@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {Route, withRouter, Link} from 'react-router-dom';
 import Panel from 'react-bootstrap/lib/Panel';
 import Button from 'react-bootstrap/lib/Button';
 import * as API from '../api/API';
+import ArtistDisplayProfile from './ArtistDisplayProfile';
 
 class ArtistProfilePage extends Component{
 
@@ -48,50 +50,72 @@ class ArtistProfilePage extends Component{
                 if (status.status === '201') {
                     console.log("User Profile Updated.")
                     alert("Your Profile has been updated.")
-                } else if (status === 401) {
+                    this.props.history.push("/artistdisplayprofile")
+                }
+
+                else if (status === 401) {
                     console.log("Error in user profile update")
                 }
             });
     };
     render(){
         return(
-            <div className="col-sm-7 col-md-7">
-                <form>
-                    <div className="form-group">
-                        <hr/>
-                    </div>
-                    <div className="input-field">
+            <div className="row justify-content-md-center">
 
-                        <input className="form-control"
-                                                    placeholder="First Name"
-                                                    type="text"
-                                                    value={this.state.fname}
-                                                    onChange={(event)=>{
-                                                        this.setState({
-                                                            fname:event.target.value
-                                                        });
-                                                    }}
-                                                    required
-                                                    autoFocus
-                />
-                    </div>
+            <div className="col-sm-10 col-md-10">
+                <div className="form-group">
+                    <hr/>
+                </div>
+                <div className="col-sm-4 col-md-4">
                     <br/>
+                    <p>First Name</p>
+                </div>
+                <br/>
+                <div className="col-sm-8 col-md-8">
                     <div className="input-field">
                         <input className="form-control"
-                               placeholder="Last Name"
+                               placeholder="First Name"
                                type="text"
-                               value={this.state.lname}
+                               value={this.state.fname}
                                onChange={(event)=>{
                                    this.setState({
-                                       lname:event.target.value
+                                       fname:event.target.value
                                    });
                                }}
                                required
+                               autoFocus
                         />
                     </div>
                     <br/>
+                </div>
 
-                    <br/>
+                <div className="col-sm-4 col-md-4">
+                    <p>Last Name</p>
+                </div>
+                <div className="col-sm-8 col-md-8">
+                    <div className="input-field">
+
+
+                            <input className="form-control"
+                                   placeholder="Last Name"
+                                   type="text"
+                                   value={this.state.lname}
+                                   onChange={(event)=>{
+                                       this.setState({
+                                           lname:event.target.value
+                                       });
+                                   }}
+                                   required
+                            />
+
+                        <br/>
+
+                    </div>
+                </div>
+                <div className="col-sm-4 col-md-4">
+                    <p>Email</p>
+                </div>
+                <div className="col-sm-8 col-md-8">
                     <div className="input-field">
                         <input className="form-control"
                                placeholder="Email no"
@@ -105,29 +129,34 @@ class ArtistProfilePage extends Component{
                                required
 
                         />
-
+                        <br/>
                     </div>
-                    <br/>
+                </div>
 
-                    <br/>
-
+                <div className="col-sm-4 col-md-4">
+                    <p>Contact Number</p>
+                </div>
+                <div className="col-sm-8 col-md-8">
                     <div className="input-field">
                         <input className="form-control"
-                            placeholder="Phone number"
-                            type="text"
-                            value={this.state.contact_no}
-                            onChange={(event)=>{
-                                this.setState({
-                                    contact_no:event.target.value
-                                });
-                            }}
-                            required
+                               placeholder="Phone number"
+                               type="text"
+                               value={this.state.contact_no}
+                               onChange={(event)=>{
+                                   this.setState({
+                                       contact_no:event.target.value
+                                   });
+                               }}
+                               required
                         />
                     </div>
                     <br/>
+                </div>
 
-                    <br/>
-
+                <div className="col-sm-4 col-md-4">
+                    <p>About Me</p>
+                </div>
+                <div className="col-sm-8 col-md-8">
                     <div className="input-field">
                         <input className="form-control"
                                placeholder="Give your brief description"
@@ -143,29 +172,42 @@ class ArtistProfilePage extends Component{
                         />
                     </div>
                     <br/>
+                </div>
 
-                    <br/>
+                <div className="col-sm-4 col-md-4">
+                    <p>Profile Picture</p>
+                </div>
+                <div className="col-sm-8 col-md-8">
                     <div className="input-field">
                         <input
-                               className={'fileupload'}
-                               type="file"
-                               ref="mypic"
-                               name="mypic"
+                            className={'fileupload'}
+                            type="file"
+                            ref="mypic"
+                            name="mypic"
                         />
 
                     </div>
                     <br/>
-
-                    <br/>
-
-                    <div className="input-field">
-                        <button className="btn btn-success" onClick={() => this.saveUserProfile(this.state)}>Update
-                        </button>
-                    </div>
-                </form>
+                </div>
+                <div className="col-sm-8 col-md-8">
+                <div className="input-field">
+                    <button className="btn btn-success" onClick={() => this.saveUserProfile(this.state)}>Update
+                    </button>
+                </div>
+                </div>
             </div>
+
+
+
+
+                <Route exact path="/artistdisplayprofile" render={() => (
+                    <ArtistDisplayProfile/>
+
+                )}/>
+            </div>
+
 
         );
     }
 }
-export default ArtistProfilePage;
+export default withRouter(ArtistProfilePage);

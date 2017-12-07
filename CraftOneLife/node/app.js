@@ -10,13 +10,15 @@ require('./routes/login')(passport);
 var index = require('./routes/index');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
+var homelesssignup = require('./routes/homelesssignup');
 var files = require('./routes/files');
 var userprofile = require('./routes/userprofile');
 var bookdetails = require('./routes/getbookdetails');
 var getartistprofile = require('./routes/getartistprofile');
 var addToCart = require('./routes/addtocart');
 var proceedCheckout = require('./routes/proceedcheckout');
-
+var addQty = require('./routes/addQuantity')
+var removeQty = require('./routes/removeQty')
 var admin = require('./routes/admin');
 var cart = require('./routes/cart');
 
@@ -52,6 +54,7 @@ app.use('/getUserProfile',getartistprofile.fetchUserProfile);
 
 app.use('/', index);
 app.post('/doSignUp',signup.doSignUp);
+app.post('/handleHomelessSignup',homelesssignup.homelessSignup);
 app.use('/files',files);
 app.use('/saveUserProfile',userprofile);
 app.post('/getBookDetails',bookdetails.getBookDetails);
@@ -60,7 +63,8 @@ app.post('/userCart',cart.userCart);
 app.post('/deleteBookQuantity',cart.deleteBookQuantity);
 app.post('/proceedCheckout',proceedCheckout.proceedCheckout);
 app.post('/emptyCheckout',proceedCheckout.emptyCheckout);
-
+app.post('/addQty',addQty.addQuantity);
+app.post('/removeQty',removeQty.removeQuantity);
 app.use('/admin',admin);
 
 app.post('/login',function(req, res,next) {

@@ -53,7 +53,8 @@ class BooksAdventure extends Component{
 
 
                         <div className="col-md-3">
-                            <div className="list-group-item clearfix">
+                            <br/>
+                            <div className="list-group-item clearfix" style={{height:215,width:250}}>
                                 <div className="pull-right">
                                     <img src={"data:image/jpeg;base64,"+tile.bookTilePath} height={100} width={200} alt={tile.bookTilePath} />
 
@@ -65,7 +66,7 @@ class BooksAdventure extends Component{
                                     <button className="btn btn-success btn-sm" onClick={()=>this.addToCart(tile)}> ADD TO CART </button>
 
                                 </div>
-                                >
+
                                 <div className="row">
 
 

@@ -50,6 +50,7 @@ var userCart = function(req,res) {
 
 
 var deleteBookQuantity = function(req,res) {
+    console.log("in handle cart delete 1 ",req.body)
     console.log("in handle cart delete" + req.body.user_id + "----" +req.body.book_id);
 
     var deleteBook = "delete from cart where cart.book_id="+req.body.book_id+" and cart.user_id="+req.body.user_id;
@@ -61,14 +62,12 @@ var deleteBookQuantity = function(req,res) {
                 console.log(err);
             }
             else {
-                if(results.length>0)
-                {
-                    res.status(201).json({
-                        status:'201'
-                    });
-                }
 
+                res.status(201).json({
+                    status:'201'
+                });
             }
+
         }, deleteBook)
 
     }
