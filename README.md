@@ -13,6 +13,8 @@ We have designed this portal for homeless and differently-abled persons to expos
 By showcasing and selling artwork, they gain self-confidence and earn money that permeates all aspects of their lives.CraftOneLife’s mission is to empower 
 artists living with homelessness or disabilities through the celebration and sale of their artwork.
 It's all about creating opportunity, empowerment.
+<img src="https://raw.githubusercontent.com/SJSU272LabF17/Project-Team-19/master/Homeless%20Profile%20and%20upload%20book/LifeCycle.jpeg" width="700" height="300"/>
+
 
 ## Configuring Together
 
