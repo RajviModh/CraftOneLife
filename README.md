@@ -12,24 +12,20 @@ There are also cases where people are incredibly lonely and talented but might n
 We have designed this portal for homeless and differently-abled persons to expose their talent to the world through their exceptional talent of creative writings and short stories.
 By showcasing and selling artwork, they gain self-confidence and earn money that permeates all aspects of their lives.CraftOneLife’s mission is to empower 
 artists living with homelessness or disabilities through the celebration and sale of their artwork.
-It's all about creating opportunity, empowerment and validations.
+It's all about creating opportunity, empowerment.
 
 ## Configuring Together
 
-Install ReactJS
-
-On the terminal: npm install -g create-react-app
-Follow the steps on the terminal to start the servers:
-Copy the Images and CSS folders from React/Public to Src
-
 <b>Back-end server : </b>
-	1. cd nodelogin
-	2. npm install
+<br/>
+	1. cd nodelogin <br/>
+	2. npm install <br/>
 	3. npm start
 
 <b>Front-end server : </b>
-	1. cd reactlogin
-	2. npm install
+<br/>
+	1. cd reactlogin <br/>
+	2. npm install <br/>
 	3. npm start
 
 ## Architecture Diagram:
@@ -37,8 +33,10 @@ Copy the Images and CSS folders from React/Public to Src
  <img src="https://raw.githubusercontent.com/SJSU272LabF17/Project-Team-19/master/Homeless%20Profile%20and%20upload%20book/architecture.png" width="700" height="300"/>
  
  ## Deliverables
- [Project URL]()
+ [Project URL](http://52.87.159.119:3000/)
+ <br/>
  [Demo Video]( https://www.youtube.com/watch?v=ncTh_p3mSIE)
+ <br/>
  [Project Report] ()
  
  ## Team Members
