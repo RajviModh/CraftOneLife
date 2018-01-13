@@ -9,10 +9,12 @@ There are also cases where people are incredibly lonely and talented but might n
 
 ## Proposed Scenario:
 
-We have designed this portal for homeless and differently-abled persons to expose their talent to the world through their exceptional talent of creative writings and short stories.
+The way CraftOneLife attracts its user is by connecting to their hearts by sharing the details of the guy who wrote it. The user understands that he is not buying a book by any famous author but by someone who is struggling with his life to break a bread. The users love it that they are not enjoying the writing of a connoisseur. They are enjoying the writing of a novice who did not have any prior knowhow of writing.
+We have designed this platform for homeless and differently-abled persons to expose their talent to the world through their exceptional talent of creative writings and short stories.
 By showcasing and selling artwork, they gain self-confidence and earn money that permeates all aspects of their lives.CraftOneLife’s mission is to empower 
 artists living with homelessness or disabilities through the celebration and sale of their artwork.
-It's all about creating opportunity, empowerment.
+It's all about creating opportunity and empowerment.
+
 <img src="https://raw.githubusercontent.com/SJSU272LabF17/Project-Team-19/master/Homeless%20Profile%20and%20upload%20book/LifeCycle.jpeg" width="700" height="300"/>
 
 
@@ -20,13 +22,13 @@ It's all about creating opportunity, empowerment.
 
 <b>Back-end server : </b>
 <br/>
-	1. cd nodelogin <br/>
+	1. cd CraftOneLife/node <br/>
 	2. npm install <br/>
 	3. npm start
 
 <b>Front-end server : </b>
 <br/>
-	1. cd reactlogin <br/>
+	1. cd CraftOneLife/react <br/>
 	2. npm install <br/>
 	3. npm start
 
@@ -39,7 +41,7 @@ It's all about creating opportunity, empowerment.
  <br/>
  [Demo Video]( https://www.youtube.com/watch?v=ncTh_p3mSIE)
  <br/>
- [Project Report] ()
+ 
  
  ## Team Members
  
